@@ -194,14 +194,19 @@
 <script>
     import About from './components/About.vue'
     import Experiences from './components/Experiences.vue'
+    import axios from 'axios'
 
     export default {
         name: "app",
+        mounted(){
+            console.log("Componente Cargado...")
+            this.prueba();
+        },
         components: {
             'about': About,
             'experiences': Experiences
         },
-        data() {
+        data() { 
             return {
                 misdatos: {
                     name: 'Luis J.',
@@ -230,6 +235,16 @@
                     },
                     
                 ]
+            }
+        },
+        methods: {
+            prueba(){
+                axios.get('https://swapi.co/api/people').then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
             }
         }
     };
